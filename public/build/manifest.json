@@ -1,0 +1,22 @@
+{
+  "resources/js/app.js": {
+    "file": "assets/app.9ab08f2a.js",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "dynamicImports": [
+      "resources/js/Pages/POS/counter.vue"
+    ]
+  },
+  "resources/js/Pages/POS/counter.vue": {
+    "file": "assets/counter.0f7f59a3.js",
+    "src": "resources/js/Pages/POS/counter.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "resources/css\\app.css": {
+    "file": "assets/app.d772e859.css",
+    "src": "resources/css\\app.css"
+  }
+}
