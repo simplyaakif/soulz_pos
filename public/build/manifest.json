@@ -15,8 +15,9 @@
       "resources/js/app.js"
     ]
   },
-  "resources/css\\app.css": {
-    "file": "assets/app.0ab521eb.css",
-    "src": "resources/css\\app.css"
+  "resources/css/app.css": {
+    "file": "assets/app.bbb72e18.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
   }
 }
