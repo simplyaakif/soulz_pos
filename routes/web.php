@@ -1,5 +1,7 @@
 <?php
 
+    use App\Http\Controllers\OrdersController;
+    use App\Http\Controllers\PosController;
     use App\Models\Item;
     use Illuminate\Support\Facades\Route;
     use Inertia\Inertia;
@@ -19,8 +21,8 @@
         return view('welcome');
     });
 
-    Route::get('pos/counter', function () {
-        return Inertia::render('POS/counter', [
-                                                'items' => Item::all(),
-                                            ]);
-    });
+    Route::get('pos/counter', [PosController::class,'index']);
+
+    Route::resource('orders', OrdersController::class)
+    ->only('store');
+
