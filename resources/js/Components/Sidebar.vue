@@ -18,49 +18,56 @@ import {Link} from "@inertiajs/inertia-vue3";
                         </div>
                     </div>
                 </li>
-                <li class="w-16 h-16 items-center justify-center bg-orange-500 flex rounded-lg">
+                <li class="w-16 h-16 items-center justify-center  flex rounded-lg"
+                    :class="[ route().current('pos.order') ? 'active bg-orange-500':'' ]">
+                    <Link :href="route('pos.order')">
                     <div class="flex flex-col items-center">
-                        <CartIcon classNames="w-7 h-7 mb-1 text-white" />
-                        <div class="text-white text-xs">
+                        <CartIcon :classNames="[ route().current('pos.order') ?
+                        'text-white w-7 h-7 mb-1':'text-gray-700 w-7 h-7 mb-1' ]"/>
+                        <div class="text-xs"
+                             :class="[ route().current('pos.order') ? 'text-white':'text-gray-700' ]">
                             Orders
                         </div>
                     </div>
+                    </Link>
                 </li>
-<!--                <li class="w-16 h-16 items-center justify-center  flex rounded-lg">-->
-<!--                    <div class="flex flex-col items-center">-->
-<!--                        <SettingIcon classNames="w-6 h-6 text-gray-400 mb-2"/>-->
-<!--                        <div class="text-gray-400 text-xs">-->
-<!--                            Settings-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </li>-->
-                <li class="w-16 h-16 items-center justify-center  flex rounded-lg">
+                <li class="w-16 h-16 items-center justify-center  flex rounded-lg"
+                    :class="[ route().current('pos.history') ? 'active bg-orange-500':'' ]">
+                    <Link :href="route('pos.history')">
                     <div class="flex flex-col items-center">
-                        <ClockIcon classNames="w-6 h-6 text-gray-400 mb-2"/>
-                        <div class="text-gray-400 text-xs">
+                        <ClockIcon :classNames="[ route().current('pos.history') ?
+                        'text-white w-7 h-7 mb-1':'text-gray-700 w-7 h-7 mb-1' ]"/>
+                        <div class="text-xs"
+                             :class="[ route().current('pos.history') ? 'text-white':'text-gray-700' ]">
                             History
                         </div>
                     </div>
+                    </Link>
                 </li>
-                <li class="w-16 h-16 items-center justify-center  flex rounded-lg">
+                <li class="w-16 h-16 items-center justify-center  flex rounded-lg"
+                    :class="[ route().current('pos.best-sellers') ? 'active bg-orange-500':'' ]">
+                    <Link :href="route('pos.best-sellers')">
                     <div class="flex flex-col items-center">
-                        <ListIcon classNames="w-6 h-6 text-gray-400 mb-2"/>
-                        <div class="text-gray-400 text-xs">
+                        <ListIcon :classNames="[ route().current('pos.best-sellers') ?
+                        'text-white w-7 h-7 mb-1':'text-gray-700 w-7 h-7 mb-1' ]"/>
+                        <div class="text-xs"
+                             :class="[ route().current('pos.best-sellers') ? 'text-white':'text-gray-700' ]">
                             Top Items
                         </div>
                     </div>
+                    </Link>
                 </li>
             </ul>
         </li>
         <li class="w-16 h-16 items-center justify-center  flex rounded-lg">
-            <Link :href="route('filament.auth.logout')" method="post" >
+            <a :href="route('logout')" >
             <div class="flex flex-col items-center">
-                <LogoutIcon classNames="w-6 h-6 text-gray-400 mb-2"/>
-                <div class="text-gray-400 text-xs">
+                <LogoutIcon classNames="w-6 h-6 text-gray-700 mb-2"/>
+                <div class="text-gray-700 text-xs">
                     Sign Out
                 </div>
             </div>
-            </Link>
+            </a>
         </li>
     </ul>
 </template>

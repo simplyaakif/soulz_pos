@@ -18,6 +18,7 @@ class FoodTypeResource extends Resource
     protected static ?string $model = FoodType::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-database';
+    protected static ?string $navigationGroup = 'Item Management';
 
     public static function form(Form $form): Form
     {

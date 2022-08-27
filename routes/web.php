@@ -2,9 +2,7 @@
 
     use App\Http\Controllers\OrdersController;
     use App\Http\Controllers\PosController;
-    use App\Models\Item;
     use Illuminate\Support\Facades\Route;
-    use Inertia\Inertia;
 
     /*
     |--------------------------------------------------------------------------
@@ -19,9 +17,24 @@
 
     Route::get('/', function () {
         return view('welcome');
+    })->name('home');
+    Route::get('/login',function (){
+       return to_route('filament.auth.login');
+    })->name('login');
+
+    Route::get('/logout',function (){
+        Auth::logout();
+       return to_route('home');
+    })->name('logout');
+
+    Route::middleware('auth')->group(function(){
+
+    Route::get('pos/order', [PosController::class,'index'])->name('pos.order');
+    Route::get('pos/history', [PosController::class,'history'])->name('pos.history');
+    Route::get('pos/best-sellers', [PosController::class,'bestSellers'])->name('pos.best-sellers');
     });
 
-    Route::get('pos/counter', [PosController::class,'index']);
+
 
     Route::resource('orders', OrdersController::class)
     ->only('store');

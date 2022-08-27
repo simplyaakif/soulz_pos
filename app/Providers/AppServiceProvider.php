@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Filament\Facades\Filament;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Model::unguard();
+                Filament::serving(function (){
+                    Filament::registerNavigationGroups([
+                        'Item Management',
+                        'Order Management',
+                        'Finance Management',
+                        'Account Management'
+                                                       ]);
+                });
     }
 }

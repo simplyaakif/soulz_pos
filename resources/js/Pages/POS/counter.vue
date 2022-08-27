@@ -1,10 +1,9 @@
 <script setup>
 import Layout from '@/Shared/Layout.vue'
-import {reactive, computed} from 'vue'
-import {CogIcon, MenuIcon} from "@heroicons/vue/solid"
+import {reactive} from 'vue'
 import PosFoodItem from "@/Components/PosFoodItem.vue";
-import SearchIcon from "@/Components/Icons/SearchIcon.vue";
 import Sidebar from "@/Components/Sidebar.vue";
+import {Head} from "@inertiajs/inertia-vue3"
 import {Inertia} from "@inertiajs/inertia";
 
 const props = defineProps(['items', 'food_types','errors'])
@@ -65,12 +64,14 @@ function calculate() {
         state.total = 0
     }
 }
-function addToCart(id) {
+function addToCart(id,data) {
+    console.log(id,data)
+
     let cartItem = {
-        index: props.items[id].id,
-        item: props.items[id],
+        index: data.id,
+        item: data,
         quantity: 1,
-        item_total: parseInt(props.items[id].price)
+        item_total: parseInt(data.price)
     }
     state.cart.push(cartItem)
     calculate()
@@ -102,20 +103,13 @@ function decreaseQuantity(index,itemIndex) {
 </script>
 <template>
     <Layout>
-        <Head/>
+        <Head title="Order Screen"/>
         <div class="h-screen">
             <div class="w-full mx-auto flex ">
                 <div class="w-1/12 border-r border-gray-50 py-10 h-screen">
                     <Sidebar/>
                 </div>
                 <div class="w-9/12 bg-gray-50 ">
-<!--                    <div class="px-8 py-2 bg-white mx-auto flex items-center justify-between  border-b border-gray-100">-->
-<!--&lt;!&ndash;                        <div class="text-gray-900 text-xl font-bolder">GHAURI Tikka</div>&ndash;&gt;-->
-<!--&lt;!&ndash;                {{route('logout')}}&ndash;&gt;-->
-<!--                        <div>-->
-<!--                            <SearchIcon class="w-6 h-6 text-gray-600"/>-->
-<!--                        </div>-->
-<!--                    </div>-->
                     <div class="px-8 py-4">
                         <Transition>
                         <ul class="flex space-x-2 items-center">
@@ -129,11 +123,14 @@ function decreaseQuantity(index,itemIndex) {
                         </ul>
                         </Transition>
                         <div class="grid grid-cols-3 mt-4 gap-4">
-                            <PosFoodItem @click="addToCart(k)"
-                                         v-for="(item,k) in state.items" :key="item.id"
-                                         :price="item.price"
+                            <div v-for="(item,k) in state.items" :key="item.id">
+                            <PosFoodItem
+                                         @addItem="addToCart(k,$event)"
+                                         :item="item"
+                                         :price="item.item_variations[0].price"
                                          :food_type="item.food_type.title"
                                          :title="item.title"/>
+                            </div>
                         </div>
                     </div>
 
@@ -148,18 +145,16 @@ function decreaseQuantity(index,itemIndex) {
                                         class="text-red-700 bg-red-100 text-xs rounded-lg px-4 py-2">Clear
                                         All
                                     </button>
-<!--                                    <button class="text-gray-700 bg-gray-100 text-xs rounded-lg px-4 py-2">-->
-<!--                                        <CogIcon-->
-<!--                                            class="w-4 h-4"/>-->
-<!--                                    </button>-->
                                 </div>
                             </div>
                             <div class="">
                                 <div class="w-full flex items-center gap-4 py-2" v-for="(item,j) in state.cart"
                                      :key="j">
                                     <div class="flex justify-between w-full items-center">
-                                        <img src="https://picsum.photos/seed/river/200"
+                                        <img v-if="items[0].file_url" :src="items[0].file_url"
                                              class="rounded w-12 h-12 object-cover" alt="Order Pic">
+                                        <div v-else class="h-12 w-12 bg-gray-100  object-cover rounded-lg"></div>
+
                                         <h5 class="font-light capitalize text-xs w-20 ">{{ item.item.title }}</h5>
                                         <div class="flex w-16 gap-2">
                                             <button @click="decreaseQuantity(j,item.index)"
@@ -201,9 +196,10 @@ function decreaseQuantity(index,itemIndex) {
 
                             </div>
                             <div>
+
                                 <button @click="submit"
                                     class="w-full h-10 bg-orange-600 rounded text-white"
-                                >Print Invoice</button>
+                                >Pay With Cash</button>
                             </div>
                         </div>
                     </div>

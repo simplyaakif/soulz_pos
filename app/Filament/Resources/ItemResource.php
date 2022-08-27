@@ -8,6 +8,8 @@ use App\Models\Item;
 use Filament\Forms;
 use Filament\Forms\Components\BelongsToSelect;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
@@ -16,6 +18,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
@@ -26,6 +29,7 @@ class ItemResource extends Resource
     protected static ?string $model = Item::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationGroup = 'Item Management';
 
     public static function form(Form $form): Form
     {
@@ -34,14 +38,11 @@ class ItemResource extends Resource
                 TextInput::make('title')
                     ->required()
                     ->maxLength(255),
-                FileUpload::make('img')
-                ->maxSize('100'),
-                TextInput::make('price')
-                    ->required()
-                    ->suffix('Rs')
-                    ->maxLength(255),
-                BelongsToSelect::make('food_type_id')
+                Select::make('food_type_id')
                 ->relationship('food_type','title'),
+                SpatieMediaLibraryFileUpload::make('img')->collection('featured_image')
+                ->image()
+                ->maxSize('100'),
                 Toggle::make('is_active'),
 
             ]);
@@ -51,11 +52,11 @@ class ItemResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('img'),
-                TextColumn::make('title')->limit(20),
-                TextColumn::make('price')->suffix(' Rs'),
+                SpatieMediaLibraryImageColumn::make('img')->collection('featured_image'),
+                TextColumn::make('title')->limit(20)->searchable(),
                 TextColumn::make('food_type.title'),
-                BooleanColumn::make('is_active'),
+                BooleanColumn::make('is_active')->label('Available'),
+                Tables\Columns\TagsColumn::make('item_variations.title')->label('Variations'),
                 TextColumn::make('created_at')
                     ->dateTime(),
             ])
@@ -74,7 +75,7 @@ class ItemResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\ItemVariationsRelationManager::class,
         ];
     }
 
