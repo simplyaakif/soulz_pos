@@ -42,7 +42,7 @@ class ItemResource extends Resource
                 ->relationship('food_type','title'),
                 SpatieMediaLibraryFileUpload::make('img')->collection('featured_image')
                 ->image()
-                ->maxSize('100'),
+                ->maxSize('500'),
                 Toggle::make('is_active'),
 
             ]);
