@@ -6,6 +6,8 @@ import Sidebar from "@/Components/Sidebar.vue";
 import {Head} from "@inertiajs/inertia-vue3"
 import {Inertia} from "@inertiajs/inertia";
 import CartItem from "@/Components/CartItem.vue";
+import Notification from "@/Components/Notification.vue";
+import {EmojiSadIcon,ArchiveIcon} from "@heroicons/vue/solid"
 
 const props = defineProps(['items', 'food_types','errors'])
 let state = reactive({
@@ -23,10 +25,11 @@ let state = reactive({
     subtotal: 0,
     tax: 0,
     total: 0,
+    show_notification:false,
 })
 function submit(){
     let data = {
-        cart:state.cart,
+        cart_items:state.cart,
         discount_amount:state.discount,
         subtotal_amount:state.subtotal,
         tax_amount:state.tax,
@@ -35,7 +38,18 @@ function submit(){
         paid_in:'cash'
 
     }
-    Inertia.post('/orders',data)
+    Inertia.post('/orders',data,{
+        onSuccess:()=>{
+            showNotification()
+            clearAll()
+        }
+    })
+
+}
+function showNotification(){
+    state.show_notification= true
+    setTimeout(()=> state.show_notification = false,3000)
+
 }
 function selectFoodType(title,id){
     state.activeFoodType = title
@@ -126,6 +140,7 @@ function decreaseQuantity(cart_array_id,variation_item_id) {
 <template>
     <Layout>
         <Head title="Order Screen"/>
+        <Notification :show="state.show_notification"/>
         <div class="h-screen">
             <div class="w-full mx-auto flex ">
                 <div class="w-1/12 border-r border-gray-50 py-10 h-screen">
@@ -206,9 +221,19 @@ function decreaseQuantity(cart_array_id,variation_item_id) {
                             </div>
                             <div>
 
-                                <button @click="submit"
-                                    class="w-full h-10 bg-orange-600 rounded text-white"
-                                >Pay With Cash</button>
+                                <button @click="submit" :disabled="state.cart.length ===0"
+                                        :class="state.cart.length===0?'bg-gray-600':'bg-orange-600'"
+                                        class="w-full h-10  rounded text-white"
+                                >
+                                    <span v-if="state.cart.length===0" class="flex items-center justify-center">
+                                        <EmojiSadIcon class="w-5 h-5 mr-2 text-white"/>
+                                        Cart Empty
+                                    </span>
+                                    <span v-else class="flex items-center justify-center">
+                                        <ArchiveIcon class="w-5 h-5 mr-2 text-white"/>
+                                    Pay With Cash
+                                    </span>
+                                </button>
                             </div>
                         </div>
                     </div>

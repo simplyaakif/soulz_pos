@@ -19,7 +19,7 @@ function addItem(){
 <template>
     <div @click="showModal = true" class="bg-white p-4 border border-gray-200 rounded-lg flex cursor-pointer flex-col ">
         <h2 class="text-gray-500 text-base font-bold capitalize">{{ props.item.title }}</h2>
-        <p class="text-xs text-gray-400">150g</p>
+        <p class="text-xs text-gray-400"> {{props.item.item_variations.length}} Options</p>
         <div class=" flex justify-between items-end">
             <p class="text-orange-500  text-2xl">Rs {{ props.item.item_variations[0].price }} </p>
 
@@ -31,7 +31,7 @@ function addItem(){
     <Modal :show="showModal" @close="showModal = false" @addItem="addItem(data)">
         <template #header>
             <div class="bg-gray-100 h-56 w-full">
-                <img class="h-full object-cover w-full "
+                <img v-if="item.file_url" class="h-full object-cover w-full "
                      :src="item.file_url" alt="">
             </div>
         </template>

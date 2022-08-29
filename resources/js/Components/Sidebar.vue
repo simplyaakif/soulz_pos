@@ -44,19 +44,19 @@ import {Link} from "@inertiajs/inertia-vue3";
                     </div>
                     </Link>
                 </li>
-                <li class="w-16 h-16 items-center justify-center  flex rounded-lg"
-                    :class="[ route().current('pos.best-sellers') ? 'active bg-orange-500':'' ]">
-                    <Link :href="route('pos.best-sellers')">
-                    <div class="flex flex-col items-center">
-                        <ListIcon :classNames="[ route().current('pos.best-sellers') ?
-                        'text-white w-7 h-7 mb-1':'text-gray-700 w-7 h-7 mb-1' ]"/>
-                        <div class="text-xs"
-                             :class="[ route().current('pos.best-sellers') ? 'text-white':'text-gray-700' ]">
-                            Top Items
-                        </div>
-                    </div>
-                    </Link>
-                </li>
+<!--                <li class="w-16 h-16 items-center justify-center  flex rounded-lg"-->
+<!--                    :class="[ route().current('pos.best-sellers') ? 'active bg-orange-500':'' ]">-->
+<!--                    <Link :href="route('pos.best-sellers')">-->
+<!--                    <div class="flex flex-col items-center">-->
+<!--                        <ListIcon :classNames="[ route().current('pos.best-sellers') ?-->
+<!--                        'text-white w-7 h-7 mb-1':'text-gray-700 w-7 h-7 mb-1' ]"/>-->
+<!--                        <div class="text-xs"-->
+<!--                             :class="[ route().current('pos.best-sellers') ? 'text-white':'text-gray-700' ]">-->
+<!--                            Top Items-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    </Link>-->
+<!--                </li>-->
             </ul>
         </li>
         <li class="w-16 h-16 items-center justify-center  flex rounded-lg">

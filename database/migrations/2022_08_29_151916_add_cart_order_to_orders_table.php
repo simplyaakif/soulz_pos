@@ -8,15 +8,15 @@
 
         public function up()
         {
-            Schema::table('items', function (Blueprint $table) {
-                $table->dropColumn('price');
+            Schema::table('orders', function (Blueprint $table) {
+                $table->json('cart_items');
             });
         }
 
         public function down()
         {
-            Schema::table('items', function (Blueprint $table) {
-                $table->string('price');
+            Schema::table('orders', function (Blueprint $table) {
+
             });
         }
     };

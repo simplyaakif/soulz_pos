@@ -39,6 +39,14 @@ class OrderResource extends Resource
                 TextInput::make('total_amount')
                     ->required()->suffix('Rs'),
 
+Forms\Components\Repeater::make('cart_items')
+->schema([
+    TextInput::make('variation_item.title'),
+    TextInput::make('quantity'),
+    TextInput::make('variation_item.price')->suffix(' Rs'),
+    TextInput::make('item_total')->suffix(' Rs'),
+         ])->columnSpan(2)->columns(4)
+
             ]);
     }
 
@@ -77,8 +85,6 @@ class OrderResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\ItemsRelationManager::class,
-            //
         ];
     }
 

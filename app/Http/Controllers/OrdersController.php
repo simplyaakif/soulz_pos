@@ -8,15 +8,6 @@
 
     class OrdersController extends Controller {
 
-        public function index()
-        {
-            //
-        }
-
-        public function create()
-        {
-            //
-        }
 
         public function store(Request $request)
         {
@@ -27,32 +18,13 @@
                                                  'subtotal_amount' => 'required',
                                                  'paid_in'     => 'required',
                                                  'items_count'     => 'required',
+                                                 'cart_items'=>'required|array|min:1'
                                              ]);
+            $order_data['cart_items']=json_encode($request->input('cart_items'));
             $order_data['user_id']=Auth::id();
-            $order_items_id = collect($request->input('cart'))->pluck('item.id');
-
             $order = Order::create($order_data);
-            $order->items()->attach($order_items_id);
-            dd($order->load('items'));
+
         }
 
-        public function show(Order $order)
-        {
-            //
-        }
 
-        public function edit(Order $order)
-        {
-            //
-        }
-
-        public function update(Request $request, Order $order)
-        {
-            //
-        }
-
-        public function destroy(Order $order)
-        {
-            //
-        }
     }

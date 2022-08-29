@@ -8,7 +8,9 @@
 
     class Order extends Model {
         protected $guarded = [];
-
+        protected $casts =[
+            'cart_items'=>'json'
+        ];
         public function items():BelongsToMany
         {
             return $this->belongsToMany(Item::class);
