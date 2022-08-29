@@ -5,6 +5,7 @@ import PosFoodItem from "@/Components/PosFoodItem.vue";
 import Sidebar from "@/Components/Sidebar.vue";
 import {Head} from "@inertiajs/inertia-vue3"
 import {Inertia} from "@inertiajs/inertia";
+import CartItem from "@/Components/CartItem.vue";
 
 const props = defineProps(['items', 'food_types','errors'])
 let state = reactive({
@@ -23,7 +24,6 @@ let state = reactive({
     tax: 0,
     total: 0,
 })
-
 function submit(){
     let data = {
         cart:state.cart,
@@ -37,7 +37,6 @@ function submit(){
     }
     Inertia.post('/orders',data)
 }
-
 function selectFoodType(title,id){
     state.activeFoodType = title
     if(id === 0){
@@ -64,38 +63,61 @@ function calculate() {
         state.total = 0
     }
 }
-function addToCart(id,data) {
-    console.log(id,data)
+function addToCart(items_array_id,data) {
 
-    let cartItem = {
-        index: data.id,
-        item: data,
-        quantity: 1,
-        item_total: parseInt(data.price)
-    }
-    state.cart.push(cartItem)
-    calculate()
-}
-function increaseQuantity(index) {
-    let currentItem = state.cart.map(item => {
-        return item.id === index;
-    })
-    state.cart[index].quantity = state.cart[index].quantity + 1
-    state.cart[index].item_total = parseInt(state.cart[index].item_total) + parseInt(state.cart[index].item.price)
-    calculate()
-}
-function decreaseQuantity(index,itemIndex) {
-    if (state.cart[index].quantity > 1) {
-        state.cart[index].quantity = state.cart[index].quantity - 1
-        state.cart[index].item_total = parseInt(state.cart[index].item_total) - parseInt(state.cart[index].item.price)
+    //Check Already Existence
+    if(state.cart.length >0){
+    let is_available = state.cart.find(cart_item=>{
+        return cart_item.variation_item_id === data.id
+    },data)
+        if(is_available){
+            let duplicate_item_index = state.cart.findIndex(cart_item=>{
+                return cart_item.variation_item_id === data.id
+            },data)
+            console.log(duplicate_item_index)
+            increaseQuantity(duplicate_item_index)
+        }else{
+            let cartItem = {
+                variation_item_id: data.id,
+                item_id: data.item.id,
+                variation_item: data,
+                quantity: 1,
+                item_total: parseInt(data.price)
+            }
+            state.cart.push(cartItem)
+            calculate()
+        }
     }else{
-        console.log(state.cart[index].index)
-        // let arrIndex = state.cart[index].index
-        console.log(itemIndex)
-        let newItems = state.cart.filter((item)=>{
-            return item.index !== itemIndex;
-        },itemIndex)
-        state.cart = newItems
+        //If not add item
+        let cartItem = {
+            variation_item_id: data.id,
+            item_id: data.item.id,
+            variation_item: data,
+            quantity: 1,
+            item_total: parseInt(data.price)
+        }
+        state.cart.push(cartItem)
+        calculate()
+    }
+}
+function increaseQuantity(cart_array_id,variation_item_id) {
+    // let currentItem = state.cart.map(item => {
+    //     return cart_item.variation_item_id === variation_item_id;
+    // })
+    state.cart[cart_array_id].quantity = state.cart[cart_array_id].quantity + 1
+    state.cart[cart_array_id].item_total = parseInt(state.cart[cart_array_id].item_total) +
+        parseInt(state.cart[cart_array_id].variation_item.price)
+    calculate()
+}
+function decreaseQuantity(cart_array_id,variation_item_id) {
+    if (state.cart[cart_array_id].quantity > 1) {
+        state.cart[cart_array_id].quantity = state.cart[cart_array_id].quantity - 1
+        state.cart[cart_array_id].item_total = parseInt(state.cart[cart_array_id].item_total) -
+            parseInt(state.cart[cart_array_id].variation_item.price)
+    }else{
+        state.cart = state.cart.filter((cart_item) => {
+            return cart_item.variation_item_id !== variation_item_id;
+        }, variation_item_id)
     }
     calculate()
 }
@@ -123,9 +145,9 @@ function decreaseQuantity(index,itemIndex) {
                         </ul>
                         </Transition>
                         <div class="grid grid-cols-3 mt-4 gap-4">
-                            <div v-for="(item,k) in state.items" :key="item.id">
+                            <div v-for="(item,items_array_id) in state.items" :key="item.id">
                             <PosFoodItem
-                                         @addItem="addToCart(k,$event)"
+                                         @addItem="addToCart(items_array_id,$event)"
                                          :item="item"
                                          :price="item.item_variations[0].price"
                                          :food_type="item.food_type.title"
@@ -148,28 +170,15 @@ function decreaseQuantity(index,itemIndex) {
                                 </div>
                             </div>
                             <div class="">
-                                <div class="w-full flex items-center gap-4 py-2" v-for="(item,j) in state.cart"
-                                     :key="j">
-                                    <div class="flex justify-between w-full items-center">
-                                        <img v-if="items[0].file_url" :src="items[0].file_url"
-                                             class="rounded w-12 h-12 object-cover" alt="Order Pic">
-                                        <div v-else class="h-12 w-12 bg-gray-100  object-cover rounded-lg"></div>
-
-                                        <h5 class="font-light capitalize text-xs w-20 ">{{ item.item.title }}</h5>
-                                        <div class="flex w-16 gap-2">
-                                            <button @click="decreaseQuantity(j,item.index)"
-                                                    class="bg-gray-100 text-gray-700 text-lg font-bold flex items-center justify-center rounded w-6 h-6 ">
-                                                -
-                                            </button>
-                                            <span class="font-bold text-lg">{{ item.quantity }}</span>
-                                            <button
-                                                @click="increaseQuantity(j)"
-                                                class="bg-gray-100 text-gray-700 text-lg font-bold flex items-center justify-center rounded w-6 h-6 ">
-                                                +
-                                            </button>
-                                        </div>
-                                        <div class="w-14 text-right text-sm">{{ item.item_total }} Rs</div>
-                                    </div>
+                                <div
+                                    class="w-full flex items-center gap-4 py-2"
+                                    v-for="(cart_item,cart_array_id) in state.cart"
+                                    :key="cart_array_id">
+                                    <CartItem
+                                        :cart_item="cart_item"
+                                        @increaseQuantity="increaseQuantity(cart_array_id,cart_item.variation_item_id)"
+                                        @decreaseQuantity="decreaseQuantity(cart_array_id,cart_item.variation_item_id)"
+                                    />
                                 </div>
                             </div>
                         </div>

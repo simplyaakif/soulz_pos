@@ -1,49 +1,49 @@
 {
   "resources/js/app.js": {
-    "file": "assets/app.0b6905a8.js",
+    "file": "assets/app.e2a55fef.js",
     "src": "resources/js/app.js",
     "isEntry": true,
     "dynamicImports": [
-      "resources/js/Pages/POS/bestSellers.vue",
-      "resources/js/Pages/POS/counter.vue",
-      "resources/js/Pages/POS/history.vue"
+      "resources/js/Pages/POS/BestSellers.vue",
+      "resources/js/Pages/POS/Order.vue",
+      "resources/js/Pages/POS/OrderHistory.vue"
     ]
   },
-  "resources/js/Pages/POS/bestSellers.vue": {
-    "file": "assets/bestSellers.4e563af6.js",
-    "src": "resources/js/Pages/POS/bestSellers.vue",
+  "resources/js/Pages/POS/BestSellers.vue": {
+    "file": "assets/BestSellers.9ced46f6.js",
+    "src": "resources/js/Pages/POS/BestSellers.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_Sidebar.ca1a138f.js",
+      "_Sidebar.dca00a71.js",
       "resources/js/app.js"
     ]
   },
-  "_Sidebar.ca1a138f.js": {
-    "file": "assets/Sidebar.ca1a138f.js",
+  "_Sidebar.dca00a71.js": {
+    "file": "assets/Sidebar.dca00a71.js",
     "imports": [
       "resources/js/app.js"
     ]
   },
-  "resources/js/Pages/POS/counter.vue": {
-    "file": "assets/counter.411c5c60.js",
-    "src": "resources/js/Pages/POS/counter.vue",
+  "resources/js/Pages/POS/Order.vue": {
+    "file": "assets/Order.054b1e07.js",
+    "src": "resources/js/Pages/POS/Order.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_Sidebar.ca1a138f.js"
+      "_Sidebar.dca00a71.js"
     ]
   },
-  "resources/js/Pages/POS/history.vue": {
-    "file": "assets/history.8bc8afd8.js",
-    "src": "resources/js/Pages/POS/history.vue",
+  "resources/js/Pages/POS/OrderHistory.vue": {
+    "file": "assets/OrderHistory.3048743e.js",
+    "src": "resources/js/Pages/POS/OrderHistory.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_Sidebar.ca1a138f.js",
+      "_Sidebar.dca00a71.js",
       "resources/js/app.js"
     ]
   },
   "resources/css/app.css": {
-    "file": "assets/app.12d208c8.css",
+    "file": "assets/app.52bd0f05.css",
     "src": "resources/css/app.css",
     "isEntry": true
   }

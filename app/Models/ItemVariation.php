@@ -7,8 +7,15 @@
 
     class ItemVariation extends Model {
 
+        protected $appends=[
+            'thumb_image_url'
+        ];
         public function item(): BelongsTo
         {
             return $this->belongsTo(Item::class);
         }
+
+        public function getThumbImageUrlAttribute(){
+            return $this->item->thumb_url;
+    }
     }

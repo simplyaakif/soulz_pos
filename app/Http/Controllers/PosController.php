@@ -15,7 +15,7 @@
                 ->has('item_variations','>',0)
                 ->where('is_active', 1)->get();
 //            dd($items);
-            return Inertia::render('POS/counter', [
+            return Inertia::render('POS/Order', [
             'items' => $items,
             'food_types'=>FoodType::has('items','>',0)->get(),
             ]);
@@ -23,14 +23,14 @@
 
         public function history()
         {
-            return Inertia::render('POS/history',[
+            return Inertia::render('POS/OrderHistory',[
                 'orders'=>Order::all()
             ]);
         }
 
         public function bestSellers()
         {
-            return Inertia::render('POS/bestSellers',[
+            return Inertia::render('POS/BestSellers',[
                 'orders'=>Order::all()
             ]);
         }

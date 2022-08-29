@@ -23,8 +23,8 @@ function addItem(){
         <div class=" flex justify-between items-end">
             <p class="text-orange-500  text-2xl">Rs {{ props.item.item_variations[0].price }} </p>
 
-            <img v-if="props.item.file_url" class="h-20 w-20  object-cover rounded-lg"
-                 :src="props.item.file_url" alt="">
+            <img v-if="props.item.thumb_url" class="h-20 w-20  object-cover rounded-lg"
+                 :src="props.item.thumb_url" alt="">
             <div v-else class="h-20 w-20 bg-gray-100  object-cover rounded-lg"></div>
         </div>
     </div>
@@ -60,7 +60,7 @@ function addItem(){
               {{ variation.short_description }}
             </RadioGroupDescription>
           </span>
-                    <span class="text-sm">
+                    <span class="text-base font-bold bg-orange-400 text-white items-center px-4 py-2 rounded-full ">
                         {{ variation.price }} Rs
                     </span>
             </span>
