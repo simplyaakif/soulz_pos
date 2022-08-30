@@ -3,13 +3,14 @@ import Layout from "@/Shared/Layout.vue";
 import {Head} from "@inertiajs/inertia-vue3"
 import Sidebar from "@/Components/Sidebar.vue";
 import OrderHistoryItem from "@/Components/OrderHistoryItem.vue";
+import {EmojiSadIcon} from "@heroicons/vue/solid";
 
 defineProps(['orders'])
 </script>
 <template>
     <Layout>
         <Head title="Order History Screen"/>
-        <div class="w-full mx-auto flex ">
+        <div class="hidden md:block w-full mx-auto flex ">
             <div class="w-1/12 border-r border-gray-50 py-10 h-screen">
                 <Sidebar/>
             </div>
@@ -22,6 +23,12 @@ defineProps(['orders'])
                     />
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="bg-gray-100 inset-0 h-screen flex justify-center items-center lg:hidden">
+            <div class="flex flex-col items-center p-8 text-center text-gray-500">
+                <EmojiSadIcon class="w-20 h-20 text-gray-500"/>
+                Kindly use a Laptop, Or Desktop Computer to use Software
             </div>
         </div>
     </Layout>

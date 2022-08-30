@@ -20,7 +20,7 @@
                                                  'items_count'     => 'required',
                                                  'cart_items'=>'required|array|min:1'
                                              ]);
-            $order_data['cart_items']=json_encode($request->input('cart_items'));
+            $order_data['cart_items']=$request->input('cart_items');
             $order_data['user_id']=Auth::id();
             $order = Order::create($order_data);
 

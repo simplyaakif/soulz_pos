@@ -141,15 +141,15 @@ function decreaseQuantity(cart_array_id,variation_item_id) {
     <Layout>
         <Head title="Order Screen"/>
         <Notification :show="state.show_notification"/>
-        <div class="h-screen">
+        <div class="hidden lg:block h-screen">
             <div class="w-full mx-auto flex ">
                 <div class="w-1/12 border-r border-gray-50 py-10 h-screen">
                     <Sidebar/>
                 </div>
-                <div class="w-9/12 bg-gray-50 ">
+                <div class="w-9/12 bg-gray-50 overflow-y-auto h-screen">
                     <div class="px-8 py-4">
                         <Transition>
-                        <ul class="flex space-x-2 items-center">
+                        <ul class="flex flex-wrap  space-x-2 items-center">
                             <li @click="selectFoodType(link.title,link.id)"
                                 :class="[state.activeFoodType === link.title ?
                                 'bg-orange-500 text-white rounded-full':'text-gray-900']"
@@ -173,9 +173,9 @@ function decreaseQuantity(cart_array_id,variation_item_id) {
 
                 </div>
                 <div class="w-3/12">
-                    <div class="bg-white px-4 h-screen flex flex-col justify-between">
+                    <div class="bg-white  h-screen flex flex-col justify-between">
                         <div>
-                            <div class="flex justify-between py-4">
+                            <div class=" px-4 flex justify-between py-4">
                                 <h4 class="font-bold text-xl text-gray-600">Current Order</h4>
                                 <div class="flex items-center">
                                     <button @click="clearAll"
@@ -184,7 +184,7 @@ function decreaseQuantity(cart_array_id,variation_item_id) {
                                     </button>
                                 </div>
                             </div>
-                            <div class="">
+                            <div class="h-80 px-4 overflow-y-auto">
                                 <div
                                     class="w-full flex items-center gap-4 py-2"
                                     v-for="(cart_item,cart_array_id) in state.cart"
@@ -198,7 +198,7 @@ function decreaseQuantity(cart_array_id,variation_item_id) {
                             </div>
                         </div>
 
-                        <div class="mb-10">
+                        <div class="mb-4 px-4">
                             <div class="border border-gray-200 rounded pt-4 px-4 my-4">
                                 <div class="flex justify-between">
                                     <h4>SubTotal</h4>
@@ -240,7 +240,12 @@ function decreaseQuantity(cart_array_id,variation_item_id) {
                 </div>
             </div>
         </div>
-
+        <div class="bg-gray-100 inset-0 h-screen flex justify-center items-center lg:hidden">
+            <div class="flex flex-col items-center p-8 text-center text-gray-500">
+            <EmojiSadIcon class="w-20 h-20 text-gray-500"/>
+            Kindly use a Laptop, Or Desktop Computer to use Software
+            </div>
+        </div>
     </Layout>
 </template>
 
