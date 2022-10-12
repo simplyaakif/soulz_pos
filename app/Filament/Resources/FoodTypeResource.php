@@ -20,6 +20,8 @@ class FoodTypeResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-database';
     protected static ?string $navigationGroup = 'Item Management';
 
+    protected static ?string $label = 'Item Type';
+
     public static function form(Form $form): Form
     {
         return $form

@@ -10,7 +10,7 @@ defineProps(['orders'])
 <template>
     <Layout>
         <Head title="Order History Screen"/>
-        <div class="hidden md:block w-full mx-auto flex ">
+        <div class="hidden md:flex w-full mx-auto ">
             <div class="w-1/12 border-r border-gray-50 py-10 h-screen">
                 <Sidebar/>
             </div>
