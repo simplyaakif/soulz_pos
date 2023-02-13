@@ -1,6 +1,6 @@
 {
   "resources/js/app.js": {
-    "file": "assets/app.7be0ce0b.js",
+    "file": "assets/app.dd0eddd4.js",
     "src": "resources/js/app.js",
     "isEntry": true,
     "dynamicImports": [
@@ -10,48 +10,48 @@
     ]
   },
   "resources/js/Pages/POS/BestSellers.vue": {
-    "file": "assets/BestSellers.9dcb21f2.js",
+    "file": "assets/BestSellers.e3f4b40c.js",
     "src": "resources/js/Pages/POS/BestSellers.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_Sidebar.e79ea797.js",
+      "_Sidebar.736fe8ba.js",
       "resources/js/app.js"
     ]
   },
-  "_Sidebar.e79ea797.js": {
-    "file": "assets/Sidebar.e79ea797.js",
+  "_Sidebar.736fe8ba.js": {
+    "file": "assets/Sidebar.736fe8ba.js",
     "imports": [
       "resources/js/app.js"
     ]
   },
   "resources/js/Pages/POS/Order.vue": {
-    "file": "assets/Order.0741d4a3.js",
+    "file": "assets/Order.85319b40.js",
     "src": "resources/js/Pages/POS/Order.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_Sidebar.e79ea797.js",
-      "_EmojiSadIcon.94119cc4.js"
+      "_Sidebar.736fe8ba.js",
+      "_EmojiSadIcon.73887abf.js"
     ]
   },
-  "_EmojiSadIcon.94119cc4.js": {
-    "file": "assets/EmojiSadIcon.94119cc4.js",
+  "_EmojiSadIcon.73887abf.js": {
+    "file": "assets/EmojiSadIcon.73887abf.js",
     "imports": [
       "resources/js/app.js"
     ]
   },
   "resources/js/Pages/POS/OrderHistory.vue": {
-    "file": "assets/OrderHistory.90853602.js",
+    "file": "assets/OrderHistory.3846fa48.js",
     "src": "resources/js/Pages/POS/OrderHistory.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_Sidebar.e79ea797.js",
+      "_Sidebar.736fe8ba.js",
       "resources/js/app.js",
-      "_EmojiSadIcon.94119cc4.js"
+      "_EmojiSadIcon.73887abf.js"
     ]
   },
   "resources/css/app.css": {
-    "file": "assets/app.2c76000b.css",
+    "file": "assets/app.919eed57.css",
     "src": "resources/css/app.css",
     "isEntry": true
   }
