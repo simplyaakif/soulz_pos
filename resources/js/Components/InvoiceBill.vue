@@ -1,9 +1,12 @@
 <script setup>
 import { computed } from 'vue'
 import { usePage } from '@inertiajs/inertia-vue3'
+import moment from 'moment';
 
 const user = computed(() => usePage().props.value.auth.user)
+const invoice_id = computed(() => usePage().props.value.order_invoice_id)
 console.log(user)
+
 defineProps({
     cart: {
         type: Array
@@ -22,16 +25,13 @@ defineProps({
 <template>
     <div id="print-receipt" class="text-[0.6rem] max-w-sm mx-auto">
         <div class="text-center mx-auto leading-[1rem]">
-            <h1 class="text-center font-bold mt-4 text-base">Ghauri Tikka & Broast</h1>
-            <p class=" inline-block border-b border-solid border-black">
-                Address :
-                Ghauri, Jallal
-                Masjid
-                Chowk Gulgasht, Multan</p>
+            <h1 class="text-center font-bold mt-4 text-xl">GTS</h1>
+            <p class=" inline-block border-b border-solid border-black text-sm">
+                Restaurant</p>
             <div>
-            <p class="inline-block border-b border-solid border-black">
-                Contact: 03001236547
-            </p>
+<!--            <p class="inline-block border-b border-solid border-black">-->
+<!--                Contact: 03001236547-->
+<!--            </p>-->
             </div>
         </div>
         <div class="flex items-center justify-between mt-2">
@@ -40,18 +40,18 @@ defineProps({
                 <span>{{user.name}}</span>
             </div>
             <div class="text-center">
-                <span>Date - </span>
-                <span>{{ new Date().toDateString() }}</span>
+                <span>Time : </span>
+                <span>{{moment().format('h:mm:ss a')}}</span>
             </div>
         </div>
         <div class="flex items-center justify-between mb-1">
             <div class="text-center">
                 <span>Invoice # - </span>
-                <span></span>
+                <span>{{invoice_id}}</span>
             </div>
             <div class="text-center">
-                <span>Date - </span>
-                <span>{{ new Date().toDateString() }}</span>
+                <span>Date : </span>
+                <span>{{moment().format('Do MMM YYYY')}}</span>
             </div>
         </div>
         <table class="w-full ">
@@ -88,7 +88,7 @@ defineProps({
             </tfoot>
         </table>
         <div class="text-center text-[.6rem] leading-[.8rem] mt-2">
-            <div class="text-xs mb">Buyer Copy</div>
+            <div class="text-xs mb">Customer Copy</div>
             <div class="">
                 Developed by Appsoulz
             </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -36,8 +37,12 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $id = Order::latest()->first();
+        $id = $id->id + 1;
+        $prefix = now()->format('ymd');
         return array_merge(parent::share($request), [
             'appName' => config('app.name'),
+            'order_invoice_id'=>$prefix.$id,
             'auth.user' => fn () => $request->user()
                 ? $request->user()->only('id', 'name', 'email')
                 : null,
