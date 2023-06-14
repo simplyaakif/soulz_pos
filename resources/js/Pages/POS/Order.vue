@@ -188,7 +188,7 @@ function decreaseQuantity(cart_array_id, variation_item_id) {
                                 </li>
                             </ul>
                         </Transition>
-                        <div class="grid grid-cols-3 mt-4 gap-4">
+                        <div class="grid grid-cols-6 mt-4 gap-4">
                             <div v-for="(item,items_array_id) in state.items" :key="item.id">
                                 <PosFoodItem
                                     @addItem="addToCart(items_array_id,$event)"

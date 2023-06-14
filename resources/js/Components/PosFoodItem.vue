@@ -18,10 +18,10 @@ function addItem(){
 </script>
 <template>
     <div @click="showModal = true" class="bg-white p-4 border border-gray-200 rounded-lg flex cursor-pointer flex-col ">
-        <h2 class="text-gray-500 text-base font-bold capitalize">{{ props.item.title }}</h2>
+        <h2 class="text-gray-500 text-xs font-bold capitalize">{{ props.item.title }}</h2>
         <p class="text-xs text-gray-400"> {{props.item.item_variations.length}} Options</p>
         <div class=" flex justify-between items-end">
-            <p class="text-orange-500  text-2xl">Rs {{ props.item.item_variations[0].price }} </p>
+            <p class="text-orange-500  text-xs">Rs {{ props.item.item_variations[0].price }} </p>
 
             <img v-if="props.item.thumb_url" class="h-20 w-20  object-cover rounded-lg"
                  :src="props.item.thumb_url" alt="">
